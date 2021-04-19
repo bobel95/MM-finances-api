@@ -6,6 +6,7 @@ import lombok.*;
 import org.javamoney.moneta.Money;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -25,8 +26,13 @@ public class Payment {
             generator = "payment_sequence")
     private Long id;
 
+
     private Money money;
     private Date date;
     private PaymentCategory paymentCategory;
+
+    public void setMoney(BigDecimal amount, String currency) {
+        this.money = Money.of(amount, currency);
+    }
 
 }
