@@ -1,22 +1,35 @@
 package com.mihmih.finances.model;
 
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import org.javamoney.moneta.Money;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
-
-@Getter @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
+@Builder
 
 public class Payment {
+
+    public Payment() {
+
+    }
+
+    public Payment(Money money, LocalDate date, PaymentCategory paymentCategory) {
+        this.money = money;
+        this.date = date;
+        this.paymentCategory = paymentCategory;
+    }
+
+    public Payment(Long id, Money money, LocalDate date, PaymentCategory paymentCategory) {
+        this.id = id;
+        this.money = money;
+        this.date = date;
+        this.paymentCategory = paymentCategory;
+    }
 
     @Id
     @SequenceGenerator(name = "payment_sequence",
@@ -28,11 +41,47 @@ public class Payment {
 
 
     private Money money;
-    private Date date;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+//    @Temporal(TemporalType.DATE)
+    private LocalDate date;
+
     private PaymentCategory paymentCategory;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Money getMoney() {
+        return money;
+    }
+
+    public void setMoney(Money money) {
+        this.money = money;
+    }
 
     public void setMoney(BigDecimal amount, String currency) {
         this.money = Money.of(amount, currency);
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public PaymentCategory getPaymentCategory() {
+        return paymentCategory;
+    }
+
+    public void setPaymentCategory(PaymentCategory paymentCategory) {
+        this.paymentCategory = paymentCategory;
+    }
 }
