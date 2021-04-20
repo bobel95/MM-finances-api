@@ -6,15 +6,12 @@ import com.mihmih.finances.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/payment")
+//@RequestMapping("/api/payment")
 public class PaymentController {
 
     private final PaymentRepository paymentRepository;
@@ -42,5 +39,12 @@ public class PaymentController {
         int day = Integer.parseInt(date.split("-")[2]);
 
         return paymentRepository.findAllByDate(LocalDate.of(year, month, day));
+    }
+
+    @DeleteMapping("/{paymentId}")
+    public void deletePayment(@PathVariable("paymentId") Long paymentId) {
+        paymentRepository.delete(
+                paymentRepository.findById(paymentId).orElseThrow(IllegalArgumentException::new)
+        );
     }
 }
