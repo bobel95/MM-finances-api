@@ -40,9 +40,9 @@ public class AppUser implements UserDetails {
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties( value = { "appUser" })
-    List<Payment> paymentList;
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonIgnoreProperties( value = { "appUser" })
+//    List<Payment> paymentList;
 
     private Boolean locked = false;
     private Boolean enabled = true;

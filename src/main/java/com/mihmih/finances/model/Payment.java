@@ -43,7 +43,6 @@ public class Payment {
     private Money money;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-//    @Temporal(TemporalType.DATE)
     private LocalDate date;
 
     private PaymentCategory paymentCategory;

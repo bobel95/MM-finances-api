@@ -13,7 +13,6 @@ import java.util.List;
 @Repository
 public interface PaymentRepository extends
         JpaRepository<Payment, Long>,
-        CustomPaymentRepository,
         JpaSpecificationExecutor<Payment>
 {
     List<Payment> findAllByDate(LocalDate date);
