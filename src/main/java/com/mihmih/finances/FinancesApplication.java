@@ -1,7 +1,10 @@
 package com.mihmih.finances;
 
+import com.mihmih.finances.model.AppUser;
+import com.mihmih.finances.model.AppUserRole;
 import com.mihmih.finances.model.Payment;
 import com.mihmih.finances.model.PaymentCategory;
+import com.mihmih.finances.repository.AppUserRepository;
 import com.mihmih.finances.repository.PaymentRepository;
 import org.apache.tomcat.jni.Local;
 import org.javamoney.moneta.Money;
@@ -29,7 +32,7 @@ public class FinancesApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(PaymentRepository paymentRepository) {
+    CommandLineRunner commandLineRunner(PaymentRepository paymentRepository, AppUserRepository appUserRepository) {
         return args -> {
             paymentRepository.saveAll(Arrays.asList(
                     Payment.builder()
@@ -48,6 +51,15 @@ public class FinancesApplication {
                             .paymentCategory(PaymentCategory.ALCOHOLIC_DRINKS)
                             .build()
                     )
+            );
+
+            appUserRepository.save(
+                    new AppUser(
+                            "Salam",
+                            "Florin",
+                            "florin@sal.am",
+                            "salam",
+                            AppUserRole.USER)
             );
         };
     }
