@@ -1,4 +1,4 @@
-package com.mihmih.finances.model;
+package com.mihmih.finances.model.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse {
-    private Long userId;
+public class AuthenticationRequest {
     private String username;
-    private String jwt;
+    private String password;
 }
