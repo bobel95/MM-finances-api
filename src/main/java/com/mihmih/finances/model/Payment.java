@@ -1,6 +1,7 @@
 package com.mihmih.finances.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import org.javamoney.moneta.Money;
@@ -11,12 +12,9 @@ import java.time.LocalDate;
 
 @Entity
 @Builder
-
+@AllArgsConstructor
+@NoArgsConstructor
 public class Payment {
-
-    public Payment() {
-
-    }
 
     public Payment(Money money, LocalDate date, PaymentCategory paymentCategory) {
         this.money = money;
@@ -47,6 +45,28 @@ public class Payment {
 
     private PaymentCategory paymentCategory;
 
+    @ManyToOne
+    @JsonIgnoreProperties( value = { "paymentList" })
+    private AppUser appUser;
+
+//    @Transient
+//    private Long appUserId;
+//
+//    public Long getAppUserId() {
+//        return appUserId;
+//    }
+//
+//    public void setAppUserId(Long appUserId) {
+//        this.appUserId = appUserId;
+//    }
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
 
     public Long getId() {
         return id;

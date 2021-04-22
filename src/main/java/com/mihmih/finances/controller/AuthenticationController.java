@@ -1,8 +1,8 @@
 package com.mihmih.finances.controller;
 
 import com.mihmih.finances.model.AppUser;
-import com.mihmih.finances.model.AuthenticationRequest;
-import com.mihmih.finances.model.AuthenticationResponse;
+import com.mihmih.finances.model.api.AuthenticationRequest;
+import com.mihmih.finances.model.api.AuthenticationResponse;
 import com.mihmih.finances.repository.AppUserRepository;
 import com.mihmih.finances.util.JwtUtil;
 import lombok.AllArgsConstructor;

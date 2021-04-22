@@ -34,25 +34,6 @@ public class FinancesApplication {
     @Bean
     CommandLineRunner commandLineRunner(PaymentRepository paymentRepository, AppUserRepository appUserRepository) {
         return args -> {
-            paymentRepository.saveAll(Arrays.asList(
-                    Payment.builder()
-                            .date(LocalDate.now())
-                            .money(Money.of(100, "RON"))
-                            .paymentCategory(PaymentCategory.CLOTHING)
-                            .build(),
-                    Payment.builder()
-                            .date(LocalDate.now())
-                            .money(Money.of(10, "RON"))
-                            .paymentCategory(PaymentCategory.ALCOHOLIC_DRINKS)
-                            .build(),
-                    Payment.builder()
-                            .date(LocalDate.of(1999, 10, 10))
-                            .money(Money.of(10, "RON"))
-                            .paymentCategory(PaymentCategory.ALCOHOLIC_DRINKS)
-                            .build()
-                    )
-            );
-
             appUserRepository.save(
                     new AppUser(
                             "Salam",
@@ -61,6 +42,30 @@ public class FinancesApplication {
                             "salam",
                             AppUserRole.USER)
             );
+
+            paymentRepository.saveAll(Arrays.asList(
+                    Payment.builder()
+                            .date(LocalDate.now())
+                            .money(Money.of(100, "RON"))
+                            .paymentCategory(PaymentCategory.CLOTHING)
+                            .appUser(appUserRepository.getOne(1L))
+                            .build(),
+                    Payment.builder()
+                            .date(LocalDate.now())
+                            .money(Money.of(10, "RON"))
+                            .paymentCategory(PaymentCategory.ALCOHOLIC_DRINKS)
+                            .appUser(appUserRepository.getOne(1L))
+                            .build(),
+                    Payment.builder()
+                            .date(LocalDate.of(1999, 10, 10))
+                            .money(Money.of(10, "RON"))
+                            .paymentCategory(PaymentCategory.ALCOHOLIC_DRINKS)
+                            .appUser(appUserRepository.getOne(1L))
+                            .build()
+                    )
+            );
+
+
         };
     }
 }
