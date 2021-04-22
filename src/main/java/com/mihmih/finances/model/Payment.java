@@ -16,19 +16,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Payment {
 
-    public Payment(Money money, LocalDate date, PaymentCategory paymentCategory) {
-        this.money = money;
-        this.date = date;
-        this.paymentCategory = paymentCategory;
-    }
-
-    public Payment(Long id, Money money, LocalDate date, PaymentCategory paymentCategory) {
-        this.id = id;
-        this.money = money;
-        this.date = date;
-        this.paymentCategory = paymentCategory;
-    }
-
     @Id
     @SequenceGenerator(name = "payment_sequence",
             sequenceName = "payment_sequence",
@@ -36,29 +23,15 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "payment_sequence")
     private Long id;
-
-
     private Money money;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate date;
-
     private PaymentCategory paymentCategory;
 
     @ManyToOne
     @JsonIgnoreProperties( value = { "paymentList" })
     private AppUser appUser;
-
-//    @Transient
-//    private Long appUserId;
-//
-//    public Long getAppUserId() {
-//        return appUserId;
-//    }
-//
-//    public void setAppUserId(Long appUserId) {
-//        this.appUserId = appUserId;
-//    }
 
     public AppUser getAppUser() {
         return appUser;

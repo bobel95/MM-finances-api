@@ -45,6 +45,11 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
+    public AppUser getOne(Long appUserId) {
+        return appUserRepository.getOne(appUserId);
+    }
+
+    @Override
     public void deleteUser(Long appUserId) {
         appUserRepository.deleteById(appUserId);
     }

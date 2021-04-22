@@ -2,38 +2,33 @@ package com.mihmih.finances.controller;
 
 import com.mihmih.finances.model.Payment;
 import com.mihmih.finances.model.PaymentCategory;
-import com.mihmih.finances.repository.AppUserRepository;
-import com.mihmih.finances.repository.PaymentRepository;
 import static com.mihmih.finances.specification.PaymentSpecification.*;
 
+import com.mihmih.finances.model.api.PaymentResponse;
+import com.mihmih.finances.service.PaymentService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.data.jpa.domain.Specification.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.text.ParseException;
-
 import java.time.LocalDate;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/payment")
 @AllArgsConstructor
 public class PaymentController {
 
-    private final PaymentRepository paymentRepository;
-    private final AppUserRepository appUserRepository;
+    private final PaymentService paymentService;
 
     @GetMapping
-    public List<Payment> getPayments(
+    public List<PaymentResponse> getPayments(
             @RequestParam(value = "category", required = false) PaymentCategory paymentCategory,
             @RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date) {
 
-        return paymentRepository.findAll(
+        return paymentService.findAll(
                 where(hasDate(date)).and(hasPaymentCategory(paymentCategory))
         );
     }
@@ -44,13 +39,26 @@ public class PaymentController {
             @RequestParam(value = "category", required = false) PaymentCategory paymentCategory,
             @RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date) {
 
+        // TODO: decide if this endpoint is needed and if its place is in paymentController or AppUserController
         return null;
     }
 
-    @PostMapping
-    public Payment addPayment(@RequestBody Payment payment) {
-        // TODO: refactor addPayment endpoint
-        payment.setAppUser(appUserRepository.getOne(payment.getAppUser().getId()));
-        return paymentRepository.save(payment);
+    @PostMapping("/{appUserId}")
+    public PaymentResponse addPayment(
+            @PathVariable("appUserId") Long appUserId,
+            @RequestBody Payment payment) {
+
+        return paymentService.savePayment(payment, appUserId);
+    }
+
+    @PutMapping
+    public PaymentResponse updatePayment(@RequestBody Payment payment) {
+        return paymentService.updatePayment(payment);
+    }
+
+
+    @DeleteMapping
+    public void deletePayment(@RequestBody Payment payment) {
+        paymentService.deletePaymentById(payment.getId());
     }
 }
