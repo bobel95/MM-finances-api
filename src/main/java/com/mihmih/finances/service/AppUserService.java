@@ -7,6 +7,6 @@ public interface AppUserService {
     AppUserResponse findById(Long appUserId);
     AppUserResponse addUser(AppUser appUser);
     AppUserResponse updateUser(AppUser appUser);
+    AppUser getOne(Long appUserId);
     void deleteUser(Long appUserId);
-
 }

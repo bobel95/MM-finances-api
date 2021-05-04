@@ -20,7 +20,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(
+            HttpServletRequest httpServletRequest,
+            HttpServletResponse httpServletResponse,
+            FilterChain filterChain) throws ServletException, IOException {
+
         String token = jwtUtil.getTokenFromRequest(httpServletRequest);
 
         if (token != null && jwtUtil.validateToken(token)) {
