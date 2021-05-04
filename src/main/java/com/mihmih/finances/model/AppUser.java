@@ -22,20 +22,15 @@ import java.util.List;
 public class AppUser implements UserDetails {
 
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
+    @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
+    private Boolean locked = false;
+    private Boolean enabled = true;
 
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
@@ -44,18 +39,15 @@ public class AppUser implements UserDetails {
     @JsonIgnoreProperties( value = { "appUser" })
     List<Payment> paymentList;
 
-    private Boolean locked = false;
-    private Boolean enabled = true;
-
     public AppUser(String firstName,
                    String lastName,
                    String email,
                    String password,
                    AppUserRole appUserRole) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
+        this.firstName   = firstName;
+        this.lastName    = lastName;
+        this.email       = email;
+        this.password    = password;
         this.appUserRole = appUserRole;
     }
 
