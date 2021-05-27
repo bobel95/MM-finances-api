@@ -8,11 +8,6 @@ The idea for this app came from a friend of mine who used a difficult to underst
 
 The MM Finances API is a RESTful API created to be consumed by <a href="https://github.com/bobel95/MM-finances-react">MM Finances React</a>
 
-[comment]: <> (<p align="center">)
-
-[comment]: <> (    <img src="https://i.imgur.com/dxuZoQU.png" width="600"/>)
-
-[comment]: <> (</p>)
 
 ## Project Status
 
@@ -43,7 +38,7 @@ Completed sprints: `1`
 ### `payment` (endpoint: `/api/payment/`)
 
 Model
-```json
+```
 {
   "appUser": {...},
   "date": "yyyy-MM-dd",
@@ -69,7 +64,7 @@ Available endpoints and methods:
 ### `appUser` (endpoint: `/api/user/`)
 
 Model
-```json
+```
 {
   "id": long,
   "email": string,
@@ -87,14 +82,14 @@ Available endpoints and methods:
 ### `authentication` (endpoint: `/authenticate`)
 * Method: `POST`
 * Request body:
-```json
+```
 {
   "password": string,
   "username": string
 }
 ```
 * Response:
-```json
+```
 {
   "jwt": string,
   "userId": long,
