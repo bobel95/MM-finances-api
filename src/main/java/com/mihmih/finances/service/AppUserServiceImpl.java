@@ -1,6 +1,7 @@
 package com.mihmih.finances.service;
 
 import com.mihmih.finances.model.AppUser;
+import com.mihmih.finances.model.AppUserRole;
 import com.mihmih.finances.model.api.AppUserResponse;
 import com.mihmih.finances.repository.AppUserRepository;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public AppUserResponse addUser(AppUser appUser) {
 
+        appUser.setAppUserRole(AppUserRole.USER);
         return new AppUserResponse(
                 appUserRepository.save(appUser)
         );

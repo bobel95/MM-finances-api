@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Repository
 public interface PaymentRepository extends
@@ -23,4 +24,6 @@ public interface PaymentRepository extends
     List<Payment> findAllByPaymentCategoryAndDate(PaymentCategory paymentCategory, LocalDate date);
 
     List<Payment> findAllByPaymentCategory(PaymentCategory paymentCategory);
+
+
 }

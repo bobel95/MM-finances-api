@@ -2,6 +2,7 @@ package com.mihmih.finances.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import org.javamoney.moneta.Money;
@@ -23,6 +24,8 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "payment_sequence")
     private Long id;
+
+    @ApiModelProperty(example = " 'money' : { 'amount': 10, 'currency': 'RON'}")
     private Money money;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")

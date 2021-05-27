@@ -35,13 +35,14 @@ public class FinancesApplication {
 
     @Bean
     CommandLineRunner commandLineRunner(PaymentRepository paymentRepository, AppUserRepository appUserRepository) {
+
         return args -> {
             appUserRepository.save(
                     new AppUser(
-                            "Salam",
-                            "Florin",
-                            "florin@sal.am",
-                            "salam",
+                            "Gigi",
+                            "Gigescu",
+                            "gigi@gmail.com",
+                            "dinti",
                             AppUserRole.USER)
             );
 
@@ -59,9 +60,21 @@ public class FinancesApplication {
                             .appUser(appUserRepository.getOne(1L))
                             .build(),
                     Payment.builder()
-                            .date(LocalDate.of(1999, 10, 10))
+                            .date(LocalDate.of(2019, 10, 10))
                             .money(Money.of(10, "RON"))
                             .paymentCategory(PaymentCategory.ALCOHOLIC_DRINKS)
+                            .appUser(appUserRepository.getOne(1L))
+                            .build(),
+                    Payment.builder()
+                            .date(LocalDate.of(2021, 5, 14))
+                            .money(Money.of(30, "RON"))
+                            .paymentCategory(PaymentCategory.INVESTMENTS)
+                            .appUser(appUserRepository.getOne(1L))
+                            .build(),
+                    Payment.builder()
+                            .date(LocalDate.of(2021, 4, 12))
+                            .money(Money.of(22.43, "RON"))
+                            .paymentCategory(PaymentCategory.FOOD)
                             .appUser(appUserRepository.getOne(1L))
                             .build()
                     )
