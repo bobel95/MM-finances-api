@@ -39,6 +39,10 @@ public class AppUser implements UserDetails {
     @JsonIgnoreProperties( value = { "appUser" })
     List<Payment> paymentList;
 
+    @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties( value = { "appUser" })
+    List<Income> incomeList;
+
     public AppUser(String firstName,
                    String lastName,
                    String email,

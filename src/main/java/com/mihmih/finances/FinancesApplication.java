@@ -39,9 +39,9 @@ public class FinancesApplication {
         return args -> {
             appUserRepository.save(
                     new AppUser(
-                            "Gigi",
-                            "Gigescu",
-                            "gigi@gmail.com",
+                            "John",
+                            "Doe",
+                            "john@gmail.com",
                             "dinti",
                             AppUserRole.USER)
             );
