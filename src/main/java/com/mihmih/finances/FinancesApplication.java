@@ -1,10 +1,8 @@
 package com.mihmih.finances;
 
-import com.mihmih.finances.model.AppUser;
-import com.mihmih.finances.model.AppUserRole;
-import com.mihmih.finances.model.Payment;
-import com.mihmih.finances.model.PaymentCategory;
+import com.mihmih.finances.model.*;
 import com.mihmih.finances.repository.AppUserRepository;
+import com.mihmih.finances.repository.IncomeRepository;
 import com.mihmih.finances.repository.PaymentRepository;
 import org.apache.tomcat.jni.Local;
 import org.javamoney.moneta.Money;
@@ -34,7 +32,7 @@ public class FinancesApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(PaymentRepository paymentRepository, AppUserRepository appUserRepository) {
+    CommandLineRunner commandLineRunner(PaymentRepository paymentRepository, AppUserRepository appUserRepository, IncomeRepository incomeRepository) {
 
         return args -> {
             appUserRepository.save(
@@ -80,7 +78,14 @@ public class FinancesApplication {
                     )
             );
 
-
+            incomeRepository.saveAll(List.of(
+                    Income.builder()
+                    .date(LocalDate.now())
+                    .money(Money.of(4000, "RON"))
+                    .appUser(appUserRepository.getOne(1L))
+                    .incomeCategory(IncomeCategory.SALARY)
+                    .build()
+            ));
         };
     }
 }

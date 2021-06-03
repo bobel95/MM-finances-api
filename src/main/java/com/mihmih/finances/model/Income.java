@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @Builder
 @EqualsAndHashCode
 @NoArgsConstructor
+@AllArgsConstructor
 public class Income {
     @Id
     @SequenceGenerator(name = "income_sequence", sequenceName = "income_sequence", allocationSize = 1)

@@ -2,6 +2,7 @@ package com.mihmih.finances.model.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.mihmih.finances.model.AppUser;
+import com.mihmih.finances.model.Income;
 import com.mihmih.finances.model.Payment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class AppUserResponse {
         this.lastName    = appUser.getLastName();
         this.email       = appUser.getEmail();
         this.paymentList = appUser.getPaymentList();
+        this.incomeList  = appUser.getIncomeList();
     }
 
     private Long id;
@@ -30,4 +32,6 @@ public class AppUserResponse {
     private String email;
     @JsonIgnoreProperties( value = { "appUser" })
     private List<Payment> paymentList;
+    @JsonIgnoreProperties( value = { "appUser" })
+    private List<Income> incomeList;
 }
