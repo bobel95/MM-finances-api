@@ -24,6 +24,7 @@ import java.util.List;
 @CrossOrigin
 @Api(value="Payment Resource REST Endpoint")
 @AllArgsConstructor
+
 public class PaymentController {
 
     private final PaymentService paymentService;

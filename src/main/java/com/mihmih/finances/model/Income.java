@@ -25,6 +25,7 @@ public class Income {
     private Money money;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate date;
+    @Enumerated(EnumType.STRING)
     private IncomeCategory incomeCategory;
 
     @ManyToOne

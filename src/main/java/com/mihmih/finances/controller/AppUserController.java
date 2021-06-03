@@ -2,8 +2,10 @@ package com.mihmih.finances.controller;
 
 import com.mihmih.finances.model.AppUser;
 import com.mihmih.finances.model.api.AppUserResponse;
+import com.mihmih.finances.model.api.ChangePasswordRequest;
 import com.mihmih.finances.service.AppUserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -34,4 +36,10 @@ public class AppUserController {
         appUserService.deleteUser(appUserId);
     }
 
+    @PostMapping("/change-password/{appUserId}")
+    public ResponseEntity changePassword(
+            @RequestBody ChangePasswordRequest request,
+            @PathVariable("appUserId") Long appUserId) {
+        return appUserService.changePassword(request, appUserId);
+    }
 }
