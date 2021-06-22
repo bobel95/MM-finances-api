@@ -39,15 +39,14 @@ public class PaymentController {
         );
     }
 
-//    @GetMapping("/{userId}")
-//    public List<Payment> getUserPayments(
-//            @PathVariable("userId") Long userId,
-//            @RequestParam(value = "category", required = false) PaymentCategory paymentCategory,
-//            @RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date) {
-//
-//        // TODO: decide if this endpoint is needed
-//        return null;
-//    }
+    @GetMapping("/{userId}")
+    public List<Payment> getUserPayments(
+            @PathVariable("userId") Long userId,
+            @RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date) {
+
+        // TODO: decide if this endpoint is needed
+        return null;
+    }
 
     @PostMapping("/{appUserId}")
     public PaymentResponse addPayment(

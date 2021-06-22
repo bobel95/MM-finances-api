@@ -165,7 +165,7 @@ public class FinancesApplication {
                     .date(LocalDate.now())
                     .money(Money.of(4000, "RON"))
                     .appUser(appUserRepository.getOne(1L))
-                    .incomeCategory(IncomeCategory.SALARY)
+                    .incomeCategory(IncomeCategory.MONTHLY)
                     .build()
             ));
         };
