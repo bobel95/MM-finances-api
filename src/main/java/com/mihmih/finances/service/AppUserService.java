@@ -11,5 +11,6 @@ public interface AppUserService {
     AppUserResponse updateUser(AppUser appUser);
     ResponseEntity changePassword(ChangePasswordRequest request, Long appUserId);
     AppUser getOne(Long appUserId);
+    boolean isEmailAlreadyUsed(String email);
     void deleteUser(Long appUserId);
 }

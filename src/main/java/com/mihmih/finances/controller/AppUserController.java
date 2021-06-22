@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/user")
 @AllArgsConstructor
@@ -22,12 +24,12 @@ public class AppUserController {
     }
 
     @PostMapping()
-    public AppUserResponse addUser(@RequestBody AppUser appUser) {
+    public AppUserResponse addUser(@Valid @RequestBody AppUser appUser) {
         return appUserService.addUser(appUser);
     }
 
     @PutMapping()
-    public AppUserResponse updateUserInfo(@RequestBody AppUser appUser) {
+    public AppUserResponse updateUserInfo(@Valid @RequestBody AppUser appUser) {
         return appUserService.updateUser(appUser);
     }
 
