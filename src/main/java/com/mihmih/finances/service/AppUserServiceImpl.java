@@ -72,15 +72,6 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public boolean isEmailAlreadyUsed(String email) {
-        if (appUserRepository.findAll().size() > 0) {
-            return appUserRepository.findByEmail(email).isPresent();
-        }
-
-        return false;
-    }
-
-    @Override
     public void deleteUser(Long appUserId) {
         appUserRepository.deleteById(appUserId);
     }
