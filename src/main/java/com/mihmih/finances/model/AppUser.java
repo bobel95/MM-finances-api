@@ -10,6 +10,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -26,11 +29,18 @@ public class AppUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
     private Long id;
 
-
+    @NotEmpty
     private String firstName;
+    @NotEmpty
     private String lastName;
+    @NotEmpty
+    @Email
+    @Column(unique = true)
     private String email;
+    @NotEmpty
+    @Size(min = 8, message = "Password should have at least 8 characters")
     private String password;
+
     private Boolean locked = false;
     private Boolean enabled = true;
 

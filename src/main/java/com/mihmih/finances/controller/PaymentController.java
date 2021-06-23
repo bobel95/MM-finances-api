@@ -15,6 +15,7 @@ import static org.springframework.data.jpa.domain.Specification.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 
 import java.util.List;
@@ -51,13 +52,13 @@ public class PaymentController {
     @PostMapping("/{appUserId}")
     public PaymentResponse addPayment(
             @PathVariable("appUserId") Long appUserId,
-            @RequestBody Payment payment) {
+            @Valid @RequestBody Payment payment) {
 
         return paymentService.savePayment(payment, appUserId);
     }
 
     @PutMapping
-    public PaymentResponse updatePayment(@RequestBody Payment payment) {
+    public PaymentResponse updatePayment(@Valid @RequestBody Payment payment) {
         return paymentService.updatePayment(payment);
     }
 

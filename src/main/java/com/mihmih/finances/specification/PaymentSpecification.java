@@ -27,6 +27,4 @@ public class PaymentSpecification {
                     : criteriaBuilder.equal(root.get("paymentCategory"), paymentCategory);
         });
     }
-
-//    public static Specification<Payment> hasUserId
 }

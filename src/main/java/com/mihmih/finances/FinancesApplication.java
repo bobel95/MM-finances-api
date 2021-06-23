@@ -40,7 +40,7 @@ public class FinancesApplication {
                             "John",
                             "Doe",
                             "john@gmail.com",
-                            "dinti",
+                            "dintimasele",
                             AppUserRole.USER)
             );
 

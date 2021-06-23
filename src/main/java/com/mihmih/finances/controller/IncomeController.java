@@ -5,6 +5,7 @@ import com.mihmih.finances.service.IncomeService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,13 +27,13 @@ public class IncomeController {
 
     @PostMapping("/{appUserId}")
     public Income addIncome(
-            @RequestBody Income income,
+            @Valid @RequestBody Income income,
             @PathVariable("appUserId") Long appUserId) {
         return service.saveIncome(income, appUserId);
     }
 
     @PutMapping()
-    public Income updateIncome(@RequestBody Income income) {
+    public Income updateIncome(@Valid @RequestBody Income income) {
         return service.updateIncome(income);
     }
 
