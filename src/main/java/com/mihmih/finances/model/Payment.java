@@ -8,6 +8,7 @@ import lombok.*;
 import org.javamoney.moneta.Money;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -26,9 +27,11 @@ public class Payment {
     private Long id;
 
     @ApiModelProperty(example = " 'money' : { 'amount': 10, 'currency': 'RON'}")
+    @NotEmpty
     private Money money;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @NotEmpty
     private LocalDate date;
     private PaymentCategory paymentCategory;
 
