@@ -6,7 +6,6 @@ import lombok.*;
 import org.javamoney.moneta.Money;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 @Entity

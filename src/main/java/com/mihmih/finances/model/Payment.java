@@ -7,7 +7,6 @@ import lombok.*;
 import org.javamoney.moneta.Money;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -33,8 +32,7 @@ public class Payment {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "payment_category_id")
-//    @JsonIgnoreProperties( value = { "paymentList" })
-    @JsonProperty("paymentCategory")
+    @JsonIgnoreProperties( value = { "paymentList" })
     private PaymentCategory paymentCategory;
 
     @ManyToOne
@@ -85,8 +83,4 @@ public class Payment {
         this.paymentCategory = paymentCategory;
     }
 
-//    @JsonProperty("paymentCategory")
-//    public String setPaymentCategoryByCategory() {
-//        paymentCategory = PaymentCategory.fromCategory(category);
-//    }
 }
