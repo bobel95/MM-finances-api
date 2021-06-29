@@ -23,15 +23,12 @@ public class Income {
     private Long id;
 
     @ApiModelProperty(example = " 'money' : { 'amount': 10, 'currency': 'RON'}")
-    @NotEmpty
     private Money money;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @NotEmpty
     private LocalDate date;
 
     @Enumerated(EnumType.STRING)
-    @NotEmpty
     private IncomeCategory incomeCategory;
 
     @ManyToOne

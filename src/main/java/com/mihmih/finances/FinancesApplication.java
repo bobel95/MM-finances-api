@@ -3,6 +3,7 @@ package com.mihmih.finances;
 import com.mihmih.finances.model.*;
 import com.mihmih.finances.repository.AppUserRepository;
 import com.mihmih.finances.repository.IncomeRepository;
+import com.mihmih.finances.repository.PaymentCategoryRepository;
 import com.mihmih.finances.repository.PaymentRepository;
 import org.apache.tomcat.jni.Local;
 import org.javamoney.moneta.Money;
@@ -32,9 +33,16 @@ public class FinancesApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(PaymentRepository paymentRepository, AppUserRepository appUserRepository, IncomeRepository incomeRepository) {
+    CommandLineRunner commandLineRunner(
+            PaymentRepository paymentRepository,
+            AppUserRepository appUserRepository,
+            IncomeRepository incomeRepository,
+            PaymentCategoryRepository paymentCategoryRepository) {
 
         return args -> {
+
+
+
             appUserRepository.save(
                     new AppUser(
                             "John",
@@ -44,119 +52,145 @@ public class FinancesApplication {
                             AppUserRole.USER)
             );
 
-            paymentRepository.saveAll(Arrays.asList(
-                    Payment.builder()
-                            .date(LocalDate.now())
-                            .money(Money.of(100, "RON"))
-                            .paymentCategory(PaymentCategory.CLOTHING)
-                            .appUser(appUserRepository.getOne(1L))
+            paymentCategoryRepository.saveAll(Arrays.asList(
+                    PaymentCategory.builder()
+                            .category("FOOD")
                             .build(),
+                    PaymentCategory.builder()
+                            .category("PETS")
+                            .build(),
+                    PaymentCategory.builder()
+                            .category("CLOTHING")
+                            .build(),
+                    PaymentCategory.builder()
+                            .category("INVESTMENTS")
+                            .build(),
+                    PaymentCategory.builder()
+                            .category("MEZELURI")
+                            .appUser(appUserRepository.getOne(1L))
+                            .build()
+            ));
+
+            paymentRepository.saveAll(Arrays.asList(
+
                     Payment.builder()
                             .date(LocalDate.now())
                             .money(Money.of(10, "RON"))
-                            .paymentCategory(PaymentCategory.FOOD)
+                            .paymentCategory(paymentCategoryRepository.findByCategory("FOOD"))
                             .appUser(appUserRepository.getOne(1L))
                             .build(),
                     Payment.builder()
                             .date(LocalDate.of(2019, 10, 10))
                             .money(Money.of(10, "RON"))
-                            .paymentCategory(PaymentCategory.FOOD)
+                            .paymentCategory(paymentCategoryRepository.findByCategory("FOOD"))
                             .appUser(appUserRepository.getOne(1L))
                             .build(),
                     Payment.builder()
                             .date(LocalDate.of(2021, 5, 14))
                             .money(Money.of(30, "RON"))
-                            .paymentCategory(PaymentCategory.INVESTMENTS)
+                            .paymentCategory(paymentCategoryRepository.findByCategory("INVESTMENTS"))
                             .appUser(appUserRepository.getOne(1L))
                             .build(),
                     Payment.builder()
                             .date(LocalDate.of(2021, 5, 14))
                             .money(Money.of(30, "RON"))
-                            .paymentCategory(PaymentCategory.FOOD)
+                            .paymentCategory(paymentCategoryRepository.findByCategory("FOOD"))
                             .appUser(appUserRepository.getOne(1L))
                             .build(),
                     Payment.builder()
                             .date(LocalDate.of(2021, 5, 14))
                             .money(Money.of(120, "RON"))
-                            .paymentCategory(PaymentCategory.INVESTMENTS)
-                            .appUser(appUserRepository.getOne(1L))
-                            .build(),
-
-//                    PETS
-                    Payment.builder()
-                            .date(LocalDate.of(2021, 6, 12))
-                            .money(Money.of(22.43, "RON"))
-                            .paymentCategory(PaymentCategory.PETS)
+                            .paymentCategory(paymentCategoryRepository.findByCategory("INVESTMENTS"))
                             .appUser(appUserRepository.getOne(1L))
                             .build(),
                     Payment.builder()
-                            .date(LocalDate.of(2021, 5, 12))
-                            .money(Money.of(32.99, "RON"))
-                            .paymentCategory(PaymentCategory.PETS)
-                            .appUser(appUserRepository.getOne(1L))
-                            .build(),
-                    Payment.builder()
-                            .date(LocalDate.of(2021, 4, 12))
-                            .money(Money.of(212.43, "RON"))
-                            .paymentCategory(PaymentCategory.PETS)
-                            .appUser(appUserRepository.getOne(1L))
-                            .build(),
-                    Payment.builder()
-                            .date(LocalDate.of(2021, 3, 12))
-                            .money(Money.of(102.43, "RON"))
-                            .paymentCategory(PaymentCategory.PETS)
-                            .appUser(appUserRepository.getOne(1L))
-                            .build(),
-                    Payment.builder()
-                            .date(LocalDate.of(2021, 2, 12))
-                            .money(Money.of(53.99, "RON"))
-                            .paymentCategory(PaymentCategory.PETS)
-                            .appUser(appUserRepository.getOne(1L))
-                            .build(),
-                    Payment.builder()
-                            .date(LocalDate.of(2021, 1, 12))
-                            .money(Money.of(92.03, "RON"))
-                            .paymentCategory(PaymentCategory.PETS)
-                            .appUser(appUserRepository.getOne(1L))
-                            .build(),
-
-//                    CLOTHING
-                    Payment.builder()
-                            .date(LocalDate.of(2021, 6, 12))
-                            .money(Money.of(222, "RON"))
-                            .paymentCategory(PaymentCategory.CLOTHING)
-                            .appUser(appUserRepository.getOne(1L))
-                            .build(),
-                    Payment.builder()
-                            .date(LocalDate.of(2021, 5, 12))
-                            .money(Money.of(123.43, "RON"))
-                            .paymentCategory(PaymentCategory.CLOTHING)
-                            .appUser(appUserRepository.getOne(1L))
-                            .build(),
-                    Payment.builder()
-                            .date(LocalDate.of(2021, 4, 12))
-                            .money(Money.of(243, "RON"))
-                            .paymentCategory(PaymentCategory.CLOTHING)
-                            .appUser(appUserRepository.getOne(1L))
-                            .build(),
-                    Payment.builder()
-                            .date(LocalDate.of(2021, 3, 12))
-                            .money(Money.of(99.99, "RON"))
-                            .paymentCategory(PaymentCategory.CLOTHING)
-                            .appUser(appUserRepository.getOne(1L))
-                            .build(),
-                    Payment.builder()
-                            .date(LocalDate.of(2021, 2, 12))
-                            .money(Money.of(102, "RON"))
-                            .paymentCategory(PaymentCategory.CLOTHING)
-                            .appUser(appUserRepository.getOne(1L))
-                            .build(),
-                    Payment.builder()
-                            .date(LocalDate.of(2021, 1, 12))
-                            .money(Money.of(89, "RON"))
-                            .paymentCategory(PaymentCategory.CLOTHING)
+                            .date(LocalDate.of(2021, 5, 14))
+                            .money(Money.of(120, "RON"))
+                            .paymentCategory(paymentCategoryRepository.findByCategory("MEZELURI"))
                             .appUser(appUserRepository.getOne(1L))
                             .build()
+//
+////                    PETS
+//                    Payment.builder()
+//                            .date(LocalDate.of(2021, 6, 12))
+//                            .money(Money.of(22.43, "RON"))
+//                            .paymentCategory(PaymentCategory.PETS)
+//                            .appUser(appUserRepository.getOne(1L))
+//                            .build(),
+//                    Payment.builder()
+//                            .date(LocalDate.of(2021, 5, 12))
+//                            .money(Money.of(32.99, "RON"))
+//                            .paymentCategory(PaymentCategory.PETS)
+//                            .appUser(appUserRepository.getOne(1L))
+//                            .build(),
+//                    Payment.builder()
+//                            .date(LocalDate.of(2021, 4, 12))
+//                            .money(Money.of(212.43, "RON"))
+//                            .paymentCategory(PaymentCategory.PETS)
+//                            .appUser(appUserRepository.getOne(1L))
+//                            .build(),
+//                    Payment.builder()
+//                            .date(LocalDate.of(2021, 3, 12))
+//                            .money(Money.of(102.43, "RON"))
+//                            .paymentCategory(PaymentCategory.PETS)
+//                            .appUser(appUserRepository.getOne(1L))
+//                            .build(),
+//                    Payment.builder()
+//                            .date(LocalDate.of(2021, 2, 12))
+//                            .money(Money.of(53.99, "RON"))
+//                            .paymentCategory(PaymentCategory.PETS)
+//                            .appUser(appUserRepository.getOne(1L))
+//                            .build(),
+//                    Payment.builder()
+//                            .date(LocalDate.of(2021, 1, 12))
+//                            .money(Money.of(92.03, "RON"))
+//                            .paymentCategory(PaymentCategory.PETS)
+//                            .appUser(appUserRepository.getOne(1L))
+//                            .build(),
+//
+////                    CLOTHING
+//                    Payment.builder()
+//                            .date(LocalDate.now())
+//                            .money(Money.of(100, "RON"))
+//                            .paymentCategory(PaymentCategory.CLOTHING)
+//                            .appUser(appUserRepository.getOne(1L))
+//                            .build(),
+//                    Payment.builder()
+//                            .date(LocalDate.of(2021, 6, 12))
+//                            .money(Money.of(222, "RON"))
+//                            .paymentCategory(PaymentCategory.CLOTHING)
+//                            .appUser(appUserRepository.getOne(1L))
+//                            .build(),
+//                    Payment.builder()
+//                            .date(LocalDate.of(2021, 5, 12))
+//                            .money(Money.of(123.43, "RON"))
+//                            .paymentCategory(PaymentCategory.CLOTHING)
+//                            .appUser(appUserRepository.getOne(1L))
+//                            .build(),
+//                    Payment.builder()
+//                            .date(LocalDate.of(2021, 4, 12))
+//                            .money(Money.of(243, "RON"))
+//                            .paymentCategory(PaymentCategory.CLOTHING)
+//                            .appUser(appUserRepository.getOne(1L))
+//                            .build(),
+//                    Payment.builder()
+//                            .date(LocalDate.of(2021, 3, 12))
+//                            .money(Money.of(99.99, "RON"))
+//                            .paymentCategory(PaymentCategory.CLOTHING)
+//                            .appUser(appUserRepository.getOne(1L))
+//                            .build(),
+//                    Payment.builder()
+//                            .date(LocalDate.of(2021, 2, 12))
+//                            .money(Money.of(102, "RON"))
+//                            .paymentCategory(PaymentCategory.CLOTHING)
+//                            .appUser(appUserRepository.getOne(1L))
+//                            .build(),
+//                    Payment.builder()
+//                            .date(LocalDate.of(2021, 1, 12))
+//                            .money(Money.of(89, "RON"))
+//                            .paymentCategory(PaymentCategory.CLOTHING)
+//                            .appUser(appUserRepository.getOne(1L))
+//                            .build()
                     )
             );
 

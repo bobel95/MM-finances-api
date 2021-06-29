@@ -21,14 +21,14 @@ public class PaymentResponse {
         this.id       = payment.getId();
         this.money    = payment.getMoney();
         this.date     = payment.getDate();
-        this.paymentCategory = payment.getPaymentCategory();
+        this.paymentCategory = payment.getPaymentCategory().getCategory();
         this.appUser  = new AppUserResponse(payment.getAppUser());
     }
 
     private Long id;
     private Money money;
     private LocalDate date;
-    private PaymentCategory paymentCategory;
+    private String paymentCategory;
     @JsonIgnoreProperties( value = { "paymentList" })
     private AppUserResponse appUser;
 }
