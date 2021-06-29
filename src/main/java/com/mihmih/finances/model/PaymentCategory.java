@@ -31,19 +31,19 @@ public class PaymentCategory {
 //    private List<Payment> paymentList;
 
     @OneToOne
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    @JsonIdentityReference(alwaysAsId = true)
-    @JsonProperty("appUserId")
+//    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//    @JsonIdentityReference(alwaysAsId = true)
+//    @JsonProperty("appUserId")
     private AppUser appUser;
 
-    @JsonProperty("appUserId")
-    public void setAppUserById(Long appUserId) {
-        appUser = AppUser.fromId(appUserId);
-    }
-
-    public static PaymentCategory fromCategory(String category) {
-        PaymentCategory paymentCategory = new PaymentCategory();
-        paymentCategory.setCategory(category);
-        return paymentCategory;
-    }
+//    @JsonProperty("appUserId")
+//    public void setAppUserById(Long appUserId) {
+//        appUser = AppUser.fromId(appUserId);
+//    }
+//
+//    public static PaymentCategory fromCategory(String category) {
+//        PaymentCategory paymentCategory = new PaymentCategory();
+//        paymentCategory.setCategory(category);
+//        return paymentCategory;
+//    }
 }
