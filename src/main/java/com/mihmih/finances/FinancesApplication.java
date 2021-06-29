@@ -63,7 +63,28 @@ public class FinancesApplication {
                             .category("CLOTHING")
                             .build(),
                     PaymentCategory.builder()
+                            .category("ALCOHOLIC_DRINKS")
+                            .build(),
+                    PaymentCategory.builder()
+                            .category("NON_ALCOHOLIC_DRINKS")
+                            .build(),
+                    PaymentCategory.builder()
+                            .category("TOBACCO")
+                            .build(),
+                    PaymentCategory.builder()
+                            .category("TRANSPORTATION")
+                            .build(),
+                    PaymentCategory.builder()
+                            .category("TOOLS")
+                            .build(),
+                    PaymentCategory.builder()
+                            .category("UTILITIES")
+                            .build(),
+                    PaymentCategory.builder()
                             .category("INVESTMENTS")
+                            .build(),
+                    PaymentCategory.builder()
+                            .category("OTHERS")
                             .build(),
                     PaymentCategory.builder()
                             .category("MEZELURI")
