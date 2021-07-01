@@ -13,7 +13,7 @@ The MM Finances API is a RESTful API created to be consumed by <a href="https://
 
 Currently working on the project in 1 week sprints.
 
-Completed sprints: `1`
+Completed sprints: `2`
 
 ## Features
 
