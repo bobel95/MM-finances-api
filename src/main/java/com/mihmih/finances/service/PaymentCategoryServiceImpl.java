@@ -15,7 +15,7 @@ import java.util.List;
 public class PaymentCategoryServiceImpl implements PaymentCategoryService {
 
     private final PaymentCategoryRepository paymentCategoryRepository;
-    private final AppUserRepository appUserRepository;
+    private final AppUserService appUserService;
 
     @Override
     public PaymentCategory findById(Long paymentCategoryId) {
@@ -29,17 +29,22 @@ public class PaymentCategoryServiceImpl implements PaymentCategoryService {
     @Override
     public List<PaymentCategory> findAllByUserId(Long userId) {
 
-        AppUser appUser = appUserRepository
-                .findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "No user found with id: " + userId
-                ));
+        AppUser appUser = appUserService.getOne(userId);
 
         return paymentCategoryRepository.findAllByAppUser(appUser);
     }
 
     @Override
-    public PaymentCategory save(PaymentCategory paymentCategory) {
+    public PaymentCategory save(PaymentCategory paymentCategory, Long userId) {
+
+//        AppUser user = appUserRepository
+//                .findById(userId)
+//                .orElseThrow(() -> new IllegalArgumentException(
+//                        "No user found with id: " + userId
+//                ));
+        AppUser appUser = appUserService.getOne(userId);
+        paymentCategory.setAppUser(appUser);
+
         return paymentCategoryRepository.save(paymentCategory);
     }
 

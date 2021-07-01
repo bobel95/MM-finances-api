@@ -13,6 +13,14 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(
+        name = "payment_category",
+        uniqueConstraints=
+        @UniqueConstraint(columnNames={
+                "app_user_id",
+                "category"}
+        )
+)
 public class PaymentCategory {
 
     @Id
@@ -30,10 +38,12 @@ public class PaymentCategory {
 //    @JsonIgnoreProperties
 //    private List<Payment> paymentList;
 
-    @OneToOne
+    @OneToOne()
+//    @JoinColumn(name="app_user_id")
 //    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 //    @JsonIdentityReference(alwaysAsId = true)
 //    @JsonProperty("appUserId")
+    @JsonIgnoreProperties({ "paymentList", "appUserRole", "enabled", "locked", "password", "incomeList", "authorities" })
     private AppUser appUser;
 
 //    @JsonProperty("appUserId")

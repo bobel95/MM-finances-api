@@ -7,6 +7,6 @@ import java.util.List;
 public interface PaymentCategoryService {
     PaymentCategory findById(Long paymentCategoryId);
     List<PaymentCategory> findAllByUserId(Long userId);
-    PaymentCategory save(PaymentCategory paymentCategory);
+    PaymentCategory save(PaymentCategory paymentCategory, Long userId);
     void delete(Long PaymentCategoryId);
 }

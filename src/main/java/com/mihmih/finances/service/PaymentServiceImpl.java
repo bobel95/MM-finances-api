@@ -1,5 +1,6 @@
 package com.mihmih.finances.service;
 
+import com.mihmih.finances.model.AppUser;
 import com.mihmih.finances.model.Payment;
 import com.mihmih.finances.model.api.PaymentResponse;
 import com.mihmih.finances.repository.PaymentCategoryRepository;
@@ -47,10 +48,15 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public PaymentResponse savePayment(Payment payment, Long appUserId) {
-        payment.setAppUser(appUserService.getOne(appUserId));
 
-        payment.setPaymentCategory(paymentCategoryRepository.findByCategory(
-                payment.getPaymentCategory().getCategory()
+        AppUser appUser = appUserService.getOne(appUserId);
+
+        payment.setAppUser(appUser);
+
+        payment.setPaymentCategory(paymentCategoryRepository
+                .findDistinctByCategoryAndAndAppUser(
+                    payment.getPaymentCategory().getCategory(),
+                    appUser
         ));
 
         return new PaymentResponse(

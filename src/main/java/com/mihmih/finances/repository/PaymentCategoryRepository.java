@@ -11,4 +11,5 @@ import java.util.List;
 public interface PaymentCategoryRepository extends JpaRepository<PaymentCategory, Long> {
     PaymentCategory findByCategory(String category);
     List<PaymentCategory> findAllByAppUser(AppUser appUser);
+    PaymentCategory findDistinctByCategoryAndAndAppUser(String category, AppUser appUser);
 }
