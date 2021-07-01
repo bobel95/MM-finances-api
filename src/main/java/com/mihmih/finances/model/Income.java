@@ -6,7 +6,6 @@ import lombok.*;
 import org.javamoney.moneta.Money;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 @Entity
@@ -23,15 +22,12 @@ public class Income {
     private Long id;
 
     @ApiModelProperty(example = " 'money' : { 'amount': 10, 'currency': 'RON'}")
-    @NotEmpty
     private Money money;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @NotEmpty
     private LocalDate date;
 
     @Enumerated(EnumType.STRING)
-    @NotEmpty
     private IncomeCategory incomeCategory;
 
     @ManyToOne

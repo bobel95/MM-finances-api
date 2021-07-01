@@ -1,7 +1,9 @@
 package com.mihmih.finances.service;
 
+import com.mihmih.finances.model.AppUser;
 import com.mihmih.finances.model.Payment;
 import com.mihmih.finances.model.api.PaymentResponse;
+import com.mihmih.finances.repository.PaymentCategoryRepository;
 import com.mihmih.finances.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentRepository paymentRepository;
+    private final PaymentCategoryRepository paymentCategoryRepository;
     private final AppUserService appUserService;
 
     @Override
@@ -45,7 +48,16 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public PaymentResponse savePayment(Payment payment, Long appUserId) {
-        payment.setAppUser(appUserService.getOne(appUserId));
+
+        AppUser appUser = appUserService.getOne(appUserId);
+
+        payment.setAppUser(appUser);
+
+        payment.setPaymentCategory(paymentCategoryRepository
+                .findDistinctByCategoryAndAndAppUser(
+                    payment.getPaymentCategory().getCategory(),
+                    appUser
+        ));
 
         return new PaymentResponse(
                 paymentRepository.save(payment)

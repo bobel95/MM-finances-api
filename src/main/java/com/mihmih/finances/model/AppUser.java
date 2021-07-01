@@ -111,4 +111,10 @@ public class AppUser implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
+
+    public static AppUser fromId(Long appUserId) {
+        AppUser appUser = new AppUser();
+        appUser.setId(appUserId);
+        return appUser;
+    }
 }

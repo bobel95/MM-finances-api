@@ -4,12 +4,15 @@ import com.mihmih.finances.model.AppUser;
 import com.mihmih.finances.model.AppUserRole;
 import com.mihmih.finances.model.api.AppUserResponse;
 import com.mihmih.finances.model.api.ChangePasswordRequest;
+import com.mihmih.finances.model.api.PaymentResponse;
 import com.mihmih.finances.repository.AppUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -23,7 +26,16 @@ public class AppUserServiceImpl implements AppUserService {
         AppUser user = appUserRepository.findById(appUserId)
                 .orElseThrow(() -> new IllegalArgumentException("no user found with id: " + appUserId));
 
-        return new AppUserResponse(user);
+
+        AppUserResponse response =  new AppUserResponse(user);
+        List<PaymentResponse> paymentResponseList = user.getPaymentList()
+                .stream()
+                .map(PaymentResponse::new)
+                .collect(Collectors.toList());
+
+        response.setPaymentList(paymentResponseList);
+
+        return response;
     }
 
     @Override

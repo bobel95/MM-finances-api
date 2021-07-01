@@ -1,14 +1,12 @@
 package com.mihmih.finances.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import org.javamoney.moneta.Money;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -27,12 +25,14 @@ public class Payment {
     private Long id;
 
     @ApiModelProperty(example = " 'money' : { 'amount': 10, 'currency': 'RON'}")
-    @NotEmpty
     private Money money;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @NotEmpty
     private LocalDate date;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "payment_category_id")
+    @JsonIgnoreProperties( value = { "paymentList" })
     private PaymentCategory paymentCategory;
 
     @ManyToOne
@@ -82,4 +82,5 @@ public class Payment {
     public void setPaymentCategory(PaymentCategory paymentCategory) {
         this.paymentCategory = paymentCategory;
     }
+
 }
