@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -22,7 +23,6 @@ public class AppUserResponse {
         this.firstName   = appUser.getFirstName();
         this.lastName    = appUser.getLastName();
         this.email       = appUser.getEmail();
-        this.paymentList = appUser.getPaymentList();
         this.incomeList  = appUser.getIncomeList();
     }
 
@@ -31,7 +31,7 @@ public class AppUserResponse {
     private String lastName;
     private String email;
     @JsonIgnoreProperties( value = { "appUser" })
-    private List<Payment> paymentList;
+    private List<PaymentResponse> paymentList;
     @JsonIgnoreProperties( value = { "appUser" })
     private List<Income> incomeList;
 }

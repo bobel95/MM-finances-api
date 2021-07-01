@@ -15,6 +15,7 @@ import static org.springframework.data.jpa.domain.Specification.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 
 import java.util.List;
@@ -24,6 +25,7 @@ import java.util.List;
 @CrossOrigin
 @Api(value="Payment Resource REST Endpoint")
 @AllArgsConstructor
+
 public class PaymentController {
 
     private final PaymentService paymentService;
@@ -38,26 +40,25 @@ public class PaymentController {
         );
     }
 
-//    @GetMapping("/{userId}")
-//    public List<Payment> getUserPayments(
-//            @PathVariable("userId") Long userId,
-//            @RequestParam(value = "category", required = false) PaymentCategory paymentCategory,
-//            @RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date) {
-//
-//        // TODO: decide if this endpoint is needed
-//        return null;
-//    }
+    @GetMapping("/{userId}")
+    public List<Payment> getUserPayments(
+            @PathVariable("userId") Long userId,
+            @RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date) {
+
+        // TODO: decide if this endpoint is needed
+        return null;
+    }
 
     @PostMapping("/{appUserId}")
     public PaymentResponse addPayment(
             @PathVariable("appUserId") Long appUserId,
-            @RequestBody Payment payment) {
+            @Valid @RequestBody Payment payment) {
 
         return paymentService.savePayment(payment, appUserId);
     }
 
     @PutMapping
-    public PaymentResponse updatePayment(@RequestBody Payment payment) {
+    public PaymentResponse updatePayment(@Valid @RequestBody Payment payment) {
         return paymentService.updatePayment(payment);
     }
 
